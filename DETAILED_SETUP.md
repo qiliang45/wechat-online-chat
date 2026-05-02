@@ -1,82 +1,82 @@
-# Detailed Setup Guide
+# 详细安装指南
 
-## Complete Installation Steps
+## 完整安装步骤
 
-### Step 1: Install Java and Maven
+### 步骤1：安装Java和Maven
 
-Follow the instructions in `JAVA_MAVEN_SETUP.md`
+按照 `JAVA_MAVEN_SETUP.md` 中的说明进行操作
 
-### Step 2: Install MySQL
+### 步骤2：安装MySQL
 
-Follow the instructions in `MYSQL_SETUP.md`
+按照 `MYSQL_SETUP.md` 中的说明进行操作
 
-### Step 3: Create Database
+### 步骤3：创建数据库
 
-Connect to MySQL and create the database:
+连接到MySQL并创建数据库：
 ```sql
 CREATE DATABASE wechat_clone CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 ```
 
-### Step 4: Configure Database Password
+### 步骤4：配置数据库密码
 
-Edit `backend/src/main/resources/application.yml`:
+编辑 `backend/src/main/resources/application.yml`：
 ```yaml
 spring:
   datasource:
     password: your_mysql_password
 ```
 
-### Step 5: Install Frontend Dependencies
+### 步骤5：安装前端依赖
 
 ```bash
 cd frontend
 npm install
 ```
 
-### Step 6: Start the Application
+### 步骤6：启动应用
 
-**Start Backend:**
+启动后端：
 ```bash
 cd backend
 mvn spring-boot:run
 ```
 
-**Start Frontend:**
+启动前端：
 ```bash
 cd frontend
 npm run dev
 ```
 
-### Step 7: Access the Application
+### 步骤7：访问应用
 
-Open browser: http://localhost:5173
+打开浏览器访问：http://localhost:5173
 
 ---
 
-## Important Installation Paths
+## 重要安装路径
 
-| Component | Path |
-|-----------|------|
+| 组件 | 路径 |
+|------|------|
 | JDK 21 | C:\Program Files\Eclipse Adoptium\jdk-21.0.11.10-hotspot |
 | Maven | C:\Program Files\Apache\maven |
 | MySQL | C:\Program Files\MySQL\MySQL Server 9.7 |
 
 ---
 
-## Quick Start Commands
+## 快速启动命令
 
-### Windows PowerShell (with temporary environment)
+### Windows PowerShell（临时环境变量）
 
 ```powershell
-# Set environment
+# 设置环境
 $env:JAVA_HOME='C:\Program Files\Eclipse Adoptium\jdk-21.0.11.10-hotspot'
 $env:Path="$env:JAVA_HOME\bin;C:\Program Files\Apache\maven\bin;$env:Path"
 
-# Start backend
+# 启动后端
 cd backend
 mvn spring-boot:run
 
-# Start frontend (new window)
+# 启动前端（新窗口）
 cd frontend
 npm install
 npm run dev
@@ -84,24 +84,24 @@ npm run dev
 
 ---
 
-## Verify Installation
+## 验证安装
 
 ```bash
-# Check Java
+# 检查Java
 java -version
 
-# Check Maven
+# 检查Maven
 mvn -version
 
-# Check MySQL connection
+# 检查MySQL连接
 mysql -u root -p -e "SHOW DATABASES;"
 ```
 
 ---
 
-## Default Configuration
+## 默认配置
 
-- Backend Port: 8080
-- Frontend Port: 5173
-- MySQL Port: 3306
-- WebSocket: ws://localhost:8080/ws
+- 后端端口：8080
+- 前端端口：5173
+- MySQL端口：3306
+- WebSocket：ws://localhost:8080/ws

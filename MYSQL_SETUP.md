@@ -1,72 +1,72 @@
-# MySQL Setup Guide
+# MySQL安装指南
 
-## Download MySQL
+## 下载MySQL
 
-1. Visit: https://dev.mysql.com/downloads/mysql/
-2. Select: Windows (x86, 64-bit), MSI Installer
-3. Click Download
+1. 访问：https://dev.mysql.com/downloads/mysql/
+2. 选择：Windows (x86, 64-bit), MSI Installer
+3. 点击 Download
 
-## Install MySQL
+## 安装MySQL
 
-1. Double-click the downloaded `.msi` file
-2. Choose **Full** installation type
-3. Set root password (remember it!)
-4. Complete installation
+1. 双击下载的 `.msi` 文件
+2. 选择 **Full** 安装类型
+3. 设置root密码（请记住！）
+4. 完成安装
 
-## Configure MySQL
+## 配置MySQL
 
-### Type and Networking Step
-1. Config Type: **Development Computer**
-2. Port: 3306 (keep default)
-3. Check: ? Show advanced options
+### 类型和网络步骤
+1. Config Type：**Development Computer**
+2. Port：3306（保持默认）
+3. 勾选：? Show advanced options
 
-### Accounts and Roles Step
-1. Set MySQL Root Password (e.g., `Wechat123!`)
-2. Click Next
+### 账户和角色步骤
+1. 设置MySQL Root密码（例如：`Wechat123!`）
+2. 点击 Next
 
-### Apply Configuration
-1. Click Execute to apply settings
-2. Wait for installation to complete
+### 应用配置
+1. 点击 Execute 应用设置
+2. 等待安装完成
 
-## Start MySQL Service
+## 启动MySQL服务
 
-MySQL service should start automatically. If not:
+MySQL服务应该自动启动。如果没有：
 
 ```bash
 net start MySQL
 ```
 
-## Create Database
+## 创建数据库
 
-Open MySQL Command Line Client or any MySQL client and run:
+打开MySQL命令行客户端或任何MySQL客户端，运行：
 
 ```sql
 CREATE DATABASE wechat_clone CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 ```
 
-## Configure Application
+## 配置应用
 
-Edit `backend/src/main/resources/application.yml`:
+编辑 `backend/src/main/resources/application.yml`：
 
 ```yaml
 spring:
   datasource:
-    password: your_mysql_password  # Change this
+    password: your_mysql_password  # 修改为你的密码
 ```
 
-## Troubleshooting
+## 常见问题
 
-### 'mysql' is not recognized
-If `mysql` command is not found, use full path:
+### 'mysql' 无法识别
+如果 `mysql` 命令找不到，使用完整路径：
 ```
 "C:\Program Files\MySQL\MySQL Server 9.7\bin\mysql.exe" -u root -p
 ```
 
-### Port 3306 is already in use
-Check what process is using port 3306:
+### 端口3306已被占用
+检查哪个进程在使用3306端口：
 ```bash
 netstat -ano | findstr :3306
 ```
 
-### Access denied error
-Make sure you're using the correct root password set during installation.
+### 访问被拒绝错误
+请确保使用的是安装时设置的正确root密码。
