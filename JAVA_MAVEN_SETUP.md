@@ -1,84 +1,72 @@
-# Java ?? Maven ??????
+# Java and Maven Setup Guide
 
-## JDK 21 ???
+## Download and Install JDK 21
 
-### ????????? winget???????
+### Download
+1. Visit: https://adoptium.net/temurin/releases/?version=21
+2. Select: Windows ¡ú x64 ¡ú JDK 21 (LTS)
+3. Download the `.msi` file
 
-```powershell
-# ??? Eclipse Temurin JDK 21
-winget install EclipseAdoptium.Temurin21.JDK
+### Install
+1. Double-click the downloaded `.msi` file
+2. Click Next through the wizard
+3. Default installation path: `C:\Program Files\Eclipse Adoptium\jdk-21.0.x.x-hotspot`
 
-# ??? Oracle JDK 21
-winget install Oracle.JDK.21
-```
+### Configure Environment Variables
+1. Press `Win + R`, type `sysdm.cpl`, press Enter
+2. Click **Advanced** tab ¡ú **Environment Variables**
+3. Under **System variables**, click **New**
+   - Variable name: `JAVA_HOME`
+   - Variable value: `C:\Program Files\Eclipse Adoptium\jdk-21.0.11.10-hotspot`
+4. Find **Path** in System variables, double-click
+5. Click **New**, add: `%JAVA_HOME%\bin`
+6. Click OK to save all
 
-### ??????????????
-
-1. ???? https://adoptium.net/ ?? https://www.oracle.com/java/technologies/downloads/
-2. ???? JDK 21 Windows ?·Ú
-3. ???§Ñ??????
-4. ?????????????
-
-```powershell
-# ????????????????????????
-[Environment]::SetEnvironmentVariable(
-    "JAVA_HOME",
-    "C:\Program Files\Eclipse Adoptium\jdk-21.0.x.x-hotspot",
-    "Machine"
-)
-
-[Environment]::SetEnvironmentVariable(
-    "Path",
-    "$env:Path;C:\Program Files\Eclipse Adoptium\jdk-21.0.x.x-hotspot\bin",
-    "Machine"
-)
-```
-
-## Maven ???
-
-### ????????? winget???????
-
-```powershell
-winget install Apache.Maven
-```
-
-### ??????????????
-
-1. ???? https://maven.apache.org/download.cgi
-2. ???? `apache-maven-3.9.x-bin.zip`
-3. ????? `C:\Program Files\Apache\maven`
-4. ?????????????
-
-```powershell
-[Environment]::SetEnvironmentVariable(
-    "MAVEN_HOME",
-    "C:\Program Files\Apache\maven",
-    "Machine"
-)
-
-[Environment]::SetEnvironmentVariable(
-    "Path",
-    "$env:Path;%MAVEN_HOME%\bin",
-    "Machine"
-)
-```
-
-## ??????
-
-?????????????????????§µ?
-
-```powershell
+### Verify
+Open a new command prompt and run:
+```bash
 java -version
+```
+
+---
+
+## Download and Install Maven
+
+### Download
+1. Visit: https://maven.apache.org/download.cgi
+2. Download `apache-maven-3.9.9-bin.zip`
+
+### Install
+1. Extract the zip to `C:\Program Files\Apache\maven`
+2. Create the folder if it doesn't exist
+
+### Configure Environment Variables
+1. Press `Win + R`, type `sysdm.cpl`, press Enter
+2. Click **Advanced** tab ¡ú **Environment Variables**
+3. Under **System variables**, click **New**
+   - Variable name: `MAVEN_HOME`
+   - Variable value: `C:\Program Files\Apache\maven`
+4. Find **Path** in System variables, double-click
+5. Click **New**, add: `%MAVEN_HOME%\bin`
+6. Click OK to save all
+
+### Verify
+Open a new command prompt and run:
+```bash
 mvn -version
 ```
 
-??????????
+---
 
+## Quick Commands
+
+If you don't want to configure environment variables, use full paths:
+
+```bash
+# Run Maven
+"C:\Program Files\Apache\maven\bin\mvn.cmd" spring-boot:run
+
+# Set temporary JAVA_HOME (Windows PowerShell)
+$env:JAVA_HOME='C:\Program Files\Eclipse Adoptium\jdk-21.0.11.10-hotspot'
+$env:Path="$env:JAVA_HOME\bin;$env:Path"
 ```
-java -version 21.x.x
-Maven 3.9.x
-```
-
-## ??????????????§¹
-
-????????????¦Ä??§¹????????????????????????????????¨À?

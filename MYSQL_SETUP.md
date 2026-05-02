@@ -1,76 +1,72 @@
-# MySQL ????????????
+# MySQL Setup Guide
 
-## ????????? winget ??????????
+## Download MySQL
 
-```powershell
-# ??? MySQL
-winget install Oracle.MySQL
+1. Visit: https://dev.mysql.com/downloads/mysql/
+2. Select: Windows (x86, 64-bit), MSI Installer
+3. Click Download
 
-# ??? MySQL Community Edition
-winget install Oracle.MySQLCommunity
-```
+## Install MySQL
 
-## ????????????????
+1. Double-click the downloaded `.msi` file
+2. Choose **Full** installation type
+3. Set root password (remember it!)
+4. Complete installation
 
-1. ???? https://dev.mysql.com/downloads/mysql/
-2. ??? Windows ??????
-3. ???? MSI Installer
-4. ???§Ñ????????? "Full" ???????
-5. ???? root ???????
+## Configure MySQL
 
-## ?????????? Docker
+### Type and Networking Step
+1. Config Type: **Development Computer**
+2. Port: 3306 (keep default)
+3. Check: ? Show advanced options
 
-```powershell
-# ??????? Docker
-docker run -d ^
-  --name mysql ^
-  -p 3306:3306 ^
-  -e MYSQL_ROOT_PASSWORD=your_password ^
-  -e MYSQL_DATABASE=wechat_clone ^
-  mysql:latest
-```
+### Accounts and Roles Step
+1. Set MySQL Root Password (e.g., `Wechat123!`)
+2. Click Next
 
-## ?????????
+### Apply Configuration
+1. Click Execute to apply settings
+2. Wait for installation to complete
 
-### 1. ???? MySQL ????
+## Start MySQL Service
 
-```powershell
-# Windows ?????
+MySQL service should start automatically. If not:
+
+```bash
 net start MySQL
-
-# ????? XAMPP/WAMP ????????
 ```
 
-### 2. ?????????
+## Create Database
 
-???? MySQL ????§µ?
+Open MySQL Command Line Client or any MySQL client and run:
 
 ```sql
 CREATE DATABASE wechat_clone CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 ```
 
-### 3. ?????????
+## Configure Application
 
-?? `backend/src/main/resources/application.yml`??
+Edit `backend/src/main/resources/application.yml`:
 
 ```yaml
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/wechat_clone?useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
-    username: root
-    password: your_mysql_password  # ??????????
+    password: your_mysql_password  # Change this
 ```
 
-## ??????
+## Troubleshooting
 
-```powershell
-mysql -u root -p
+### 'mysql' is not recognized
+If `mysql` command is not found, use full path:
+```
+"C:\Program Files\MySQL\MySQL Server 9.7\bin\mysql.exe" -u root -p
 ```
 
-???????????§µ?
-
-```sql
-SHOW DATABASES;
+### Port 3306 is already in use
+Check what process is using port 3306:
+```bash
+netstat -ano | findstr :3306
 ```
 
-????? `wechat_clone` ?????????????
+### Access denied error
+Make sure you're using the correct root password set during installation.
